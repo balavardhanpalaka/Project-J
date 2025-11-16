@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MediaShare — images & videos with messages</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>MediaShare</h1>
+    <nav class="top-nav">
+      <button id="nav-dashboard" class="nav-btn" hidden>Dashboard</button>
+      <button id="nav-view" class="nav-btn">View shared</button>
+      <button id="nav-logout" class="nav-btn" hidden>Logout</button>
+    </nav>
+  </header>
+
+  <main id="app">
+    <!-- Login view -->
+    <section id="login-view" class="card">
+      <h2>Enter your Date of Birth to continue</h2>
+      <form id="login-form">
+        <label for="dob">Date of birth</label>
+        <input id="dob" name="dob" type="date" required>
+        <div class="helper">We use DOB only to identify your session locally.</div>
+        <button type="submit" class="primary">Enter</button>
+      </form>
+    </section>
+
+    <!-- Dashboard / inner interface -->
+    <section id="dashboard-view" class="card" hidden>
+      <h2>Your Dashboard</h2>
+
+      <div class="upload-area">
+        <form id="upload-form">
+          <label for="file-input">Upload image or video</label>
+          <input id="file-input" type="file" accept="image/*,video/*" required>
+          <label for="caption-input">Caption / message</label>
+          <input id="caption-input" type="text" placeholder="Write a message under the file (optional)">
+          <button type="submit" class="primary">Upload</button>
+        </form>
+
+        <div id="preview" class="preview" hidden>
+          <h3>Preview</h3>
+          <div id="preview-media"></div>
+          <div id="preview-caption" class="caption"></div>
+        </div>
+      </div>
+
+      <div class="share-area">
+        <h3>Share your gallery</h3>
+        <p>Create a code that you can send to a friend. They can view shared items by entering it on the "View shared" screen.</p>
+        <button id="create-share" class="primary">Create share code for my current items</button>
+        <div id="share-result" class="share-result" hidden>
+          <label>Your share code (send this to your friend):</label>
+          <div id="share-code" class="code"></div>
+          <div class="helper">Share both the site link and this code. The code lets others view only the items you included in the share.</div>
+        </div>
+      </div>
+
+      <div class="gallery-section">
+        <h3>My uploads</h3>
+        <div id="gallery" class="gallery"></div>
+      </div>
+    </section>
+
+    <!-- View shared -->
+    <section id="view-share" class="card" hidden>
+      <h2>View shared gallery</h2>
+      <form id="view-form">
+        <label for="share-input">Enter share code</label>
+        <input id="share-input" type="text" placeholder="e.g. AB12CD" required>
+        <button type="submit" class="primary">View</button>
+      </form>
+
+      <div id="shared-gallery-section" hidden>
+        <h3>Shared items</h3>
+        <div id="shared-gallery" class="gallery"></div>
+      </div>
+    </section>
+
+    <!-- Footer / notes -->
+    <section class="card small" id="notes">
+      <h4>Notes</h4>
+      <ul>
+        <li>All media are stored locally in your browser (IndexedDB). Files do not leave your machine unless you share them out-of-band.</li>
+        <li>Sharing is implemented via a code stored locally — anyone using the same browser with that code can view the shared items.</li>
+        <li>For a production site you would replace local storage with a server and authenticated accounts.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>MediaShare • Demo client-only app</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
